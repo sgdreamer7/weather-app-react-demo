@@ -86,7 +86,7 @@ class AddCityModal extends React.Component {
           <ModalHeader toggle={this.toggle}>Add city</ModalHeader>
           <ModalBody>
             <Label for='selector'>Select</Label>
-            <Input type='text' name='select' value={this.state.value} onChange={this.handleNameChange} />
+            <Input type='text' name='select' value={this.state.value} onChange={this.handleNameChange} innerRef={(input) => { if (input) input.focus() }} />
           </ModalBody>
           <ModalFooter>
             <Button color='primary' onClick={this.toggleOK}>OK</Button>{' '}
