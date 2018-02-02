@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Button } from 'reactstrap'
 import agent from '../agent'
-import { REDIRECT, DELETE_CITY, CITIES_DATA_LOADED, UPDATE_SETTINGS } from '../constants/actionTypes'
+import { REDIRECT, DELETE_CITY, CITIES_DATA_LOADED, UPDATE_SETTINGS, MOVE_DOWN_CITY, MOVE_UP_CITY } from '../constants/actionTypes'
 
 const mapStateToProps = state => ({
   units: state.common.units,
@@ -16,6 +16,14 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: DELETE_CITY, payload: id })
     dispatch({ type: UPDATE_SETTINGS })
   },
+  moveDownCity: (id) => {
+    dispatch({ type: MOVE_DOWN_CITY, payload: id })
+    dispatch({ type: UPDATE_SETTINGS })
+  },
+  moveUpCity: (id) => {
+    dispatch({ type: MOVE_UP_CITY, payload: id })
+    dispatch({ type: UPDATE_SETTINGS })
+  },
   onRedirect: () =>
     dispatch({ type: REDIRECT }),
   updateCitiesData: (ids, units, lang) =>
@@ -23,6 +31,14 @@ const mapDispatchToProps = dispatch => ({
 })
 
 class CityPreview extends React.Component {
+  constructor(props) {
+    super(props)
+    this.updateCitiesData = this.updateCitiesData.bind(this)
+    this.deleteCity = this.deleteCity.bind(this)
+    this.moveDownCity = this.moveDownCity.bind(this)
+    this.moveUpCity = this.moveUpCity.bind(this)
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.redirectTo) {
       this.context.router.replace(nextProps.redirectTo)
@@ -45,16 +61,15 @@ class CityPreview extends React.Component {
         <td>{this.props.city.main.pressure / 10}&nbsp;kPa</td>
         <td>{this.props.city.main.humidity}%</td>
         <td>
-              <Button className='btn-outline-primary' color='primary' size='sm'><i className='wi wi-direction-down' /></Button>
-              <Button className='btn-outline-primary mr-1' color='primary' size='sm'><i className='wi wi-direction-up' /></Button>
-              <Button className='btn-outline-danger' color='danger' size='sm' onClick={() => this.deleteCity()}>x</Button>
+          <Button className='btn-outline-primary' color='primary' size='sm' onClick={() => this.moveDownCity()}><i className='wi wi-direction-down' /></Button>
+          <Button className='btn-outline-primary' color='primary' size='sm' onClick={() => this.moveUpCity()}><i className='wi wi-direction-up' /></Button>
+          <Button className='btn-outline-danger' color='danger' size='sm' onClick={() => this.deleteCity()}>x</Button>
         </td>
       </tr>
     )
   }
 
-  deleteCity() {
-    this.props.deleteCity(this.props.city.id)
+  updateCitiesData() {
     const store = this.context.store
     const state = store.getState()
     const ids = state.common.cities
@@ -62,6 +77,23 @@ class CityPreview extends React.Component {
     const lang = state.common.lang
     this.props.updateCitiesData(ids, units, lang)
   }
+
+  deleteCity() {
+    this.props.deleteCity(this.props.city.id)
+    this.updateCitiesData();
+  }
+
+
+  moveDownCity() {
+    this.props.moveDownCity(this.props.city.id)
+    this.updateCitiesData();
+  }
+
+  moveUpCity() {
+    this.props.moveUpCity(this.props.city.id)
+    this.updateCitiesData();
+  }
+
 }
 
 CityPreview.contextTypes = {

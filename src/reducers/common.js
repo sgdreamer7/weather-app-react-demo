@@ -4,6 +4,8 @@ import {
   CITIES_DATA_LOADED,
   DELETE_CITY,
   ADD_CITY,
+  MOVE_DOWN_CITY,
+  MOVE_UP_CITY,
   UPDATE_UNITS,
   UPDATE_LANG,
   UPDATE_SETTINGS
@@ -58,6 +60,26 @@ export default (state = defaultState, action) => {
       const foundIndex2 = cities.indexOf(action.payload)
       if (foundIndex2 === -1) {
         cities.push(action.payload)
+      }
+      return {
+        ...state,
+        cities: cities.slice()
+      }
+    case MOVE_DOWN_CITY:
+      const foundIndex3 = cities.indexOf(action.payload)
+      if ((foundIndex3 >= 0) && (foundIndex3 < cities.length - 1)) {
+        cities.splice(foundIndex3, 1)
+        cities.splice(foundIndex3 + 1, 0, action.payload)
+      }
+      return {
+        ...state,
+        cities: cities.slice()
+      }
+    case MOVE_UP_CITY:
+      const foundIndex4 = cities.indexOf(action.payload)
+      if ((foundIndex4 > 0) && (foundIndex4 < cities.length)) {
+        cities.splice(foundIndex4, 1)
+        cities.splice(foundIndex4 - 1, 0, action.payload)
       }
       return {
         ...state,
