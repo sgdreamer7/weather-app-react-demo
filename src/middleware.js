@@ -29,8 +29,19 @@ const promiseMiddleware = store => next => action => {
   next(action)
 }
 
+const localStorageMiddleware = store => next => action => {
+  const state=store.getState()
+  const snapshot={
+    units:state.common.units,
+    lang:state.common.lang,
+    cities:state.common.cities
+  }
+  localStorage.setItem('weather-app-react-demo',JSON.stringify(snapshot))
+  next(action)
+}
+
 function isPromise(v) {
   return v && typeof v.then === 'function'
 }
 
-export { promiseMiddleware }
+export { promiseMiddleware, localStorageMiddleware }

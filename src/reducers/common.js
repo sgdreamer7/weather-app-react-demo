@@ -7,13 +7,22 @@ import {
   ADD_CITY
 } from '../constants/actionTypes'
 
-const commonsStored=localStorage.getItem('weather-app-commons')
+const snapshot = JSON.parse(localStorage.getItem('weather-app-react-demo'))
+
+let units = 'metric'
+let lang = 'ua'
+let cities = [687700]
+if (snapshot !== null) {
+  units = snapshot.units || units;
+  lang = snapshot.lang || lang;
+  cities = snapshot.cities || cities;
+}
 
 const defaultState = {
   appName: 'Weather App',
-  units: 'metric',
-  lang: 'ua',
-  cities: [687700],
+  units,
+  lang,
+  cities,
   citiesList: [],
   citiesData: []
 }
@@ -42,7 +51,7 @@ export default (state = defaultState, action) => {
     case DELETE_CITY:
       const foundIndex = cities.indexOf(action.payload)
       if (foundIndex >= 0) {
-        cities.splice(foundIndex,1)
+        cities.splice(foundIndex, 1)
       }
       return {
         ...state,
