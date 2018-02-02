@@ -23,7 +23,7 @@ if (snapshot !== null) {
 }
 
 const defaultState = {
-  appName: 'Weather App',
+  appName: 'Weather App React Demo',
   units,
   lang,
   cities,
