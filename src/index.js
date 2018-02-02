@@ -14,7 +14,7 @@ import App from './components/App'
 ReactDOM.render((
 	<Provider store={store}>
 		<Router history={hashHistory}>
-			<Route path="/" component={App}>
+			<Route path='/' component={App}>
 				<IndexRoute component={Home} />
 				<Route path='/city/:cityId' component={City} />
         <Route path='/settings' component={Settings} />

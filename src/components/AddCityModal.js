@@ -91,7 +91,7 @@ class AddCityModal extends React.Component {
     this.newCitiesList = citiesList.filter(city => !cities.includes(city.id))
     return (
       <div>
-        <Button color='primary' onClick={this.toggle}>{this.props.buttonLabel}</Button>
+        <Button className='btn-outline-primary' color='primary' size='sm' onClick={this.toggle}>{this.props.buttonLabel}</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Add city</ModalHeader>
           <ModalBody>

@@ -36,30 +36,30 @@ class Home extends React.Component {
   render() {
     return (
       <div className='container'>
-        
+
         <h1 className='text-center'>Cities</h1>
         <h4>
-          <table className='table'>
+          <table className='table table-striped table-sm'>
             <thead>
               <tr>
-                <th scope='col'>City</th>
-                <th scope='col'>Weather</th>
-                <th scope='col'><i className='wi wi-fw wi-thermometer' /></th>
-                <th scope='col'><i className='wi wi-fw wi-thermometer' /> min</th>
-                <th scope='col'><i className='wi wi-fw wi-thermometer' /> max</th>
-                <th scope='col'><i className='wi wi-fw wi-barometer' /></th>
-                <th scope='col'><i className='wi wi-fw wi-humidity' /></th>
-                <th scope='col'><AddCityModal buttonLabel='+'/></th>
+                <th>City</th>
+                <th>Weather</th>
+                <th><i className='wi wi-fw wi-thermometer' /></th>
+                <th><i className='wi wi-fw wi-thermometer' /> min</th>
+                <th><i className='wi wi-fw wi-thermometer' /> max</th>
+                <th><i className='wi wi-fw wi-barometer' /></th>
+                <th><i className='wi wi-fw wi-humidity' /></th>
+                <th><AddCityModal buttonLabel='+' /></th>
               </tr>
             </thead>
             <tbody>
               {
                 (
-                  this.props.citiesData ? 
-                    this.props.citiesData.map(city => { return <CityPreview key={city.id} city={city} />})
+                  this.props.citiesData ?
+                    this.props.citiesData.map(city => { return <CityPreview key={city.id} city={city} /> })
                     : <tr>
-                        <td colSpan='8' className='text-center'>not selected</td>
-                      </tr>
+                      <td colSpan='8' className='text-center'>not selected</td>
+                    </tr>
                 )
               }
             </tbody>
