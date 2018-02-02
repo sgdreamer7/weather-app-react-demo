@@ -66,7 +66,7 @@ class App extends React.Component {
         <Header appName={this.props.appName} />
         <div className='container'>
           <main role='main' className='container mt-5 pt-3'>
-            <h3 className='container'>Loading cities list....</h3>
+            <h3 className='alert alert-info text-center'>Loading cities list....</h3>
           </main>
         </div>
         <Footer />

@@ -1,10 +1,12 @@
 import {
   APP_LOAD,
   REDIRECT,
-  SETTINGS_SAVED,
   CITIES_DATA_LOADED,
   DELETE_CITY,
-  ADD_CITY
+  ADD_CITY,
+  UPDATE_UNITS,
+  UPDATE_LANG,
+  UPDATE_SETTINGS
 } from '../constants/actionTypes'
 
 const snapshot = JSON.parse(localStorage.getItem('weather-app-react-demo'))
@@ -13,9 +15,9 @@ let units = 'metric'
 let lang = 'ua'
 let cities = [687700]
 if (snapshot !== null) {
-  units = snapshot.units || units;
-  lang = snapshot.lang || lang;
-  cities = snapshot.cities || cities;
+  units = snapshot.units || units
+  lang = snapshot.lang || lang
+  cities = snapshot.cities || cities
 }
 
 const defaultState = {
@@ -43,11 +45,6 @@ export default (state = defaultState, action) => {
         ...state,
         citiesData: action.payload.list
       }
-    case SETTINGS_SAVED:
-      return {
-        ...state,
-        redirectTo: action.error ? null : '/'
-      }
     case DELETE_CITY:
       const foundIndex = cities.indexOf(action.payload)
       if (foundIndex >= 0) {
@@ -65,6 +62,20 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         cities: cities.slice()
+      }
+    case UPDATE_UNITS:
+      return {
+        ...state,
+        units: action.payload
+      }
+    case UPDATE_LANG:
+      return {
+        ...state,
+        lang: action.payload
+      }
+    case UPDATE_SETTINGS:
+      return {
+        ...state
       }
     default:
       return state

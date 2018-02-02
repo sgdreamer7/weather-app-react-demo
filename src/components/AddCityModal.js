@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import agent from '../agent'
 import { Label, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
-import { REDIRECT, ADD_CITY, CITIES_DATA_LOADED } from '../constants/actionTypes'
+import { REDIRECT, ADD_CITY, CITIES_DATA_LOADED, UPDATE_SETTINGS } from '../constants/actionTypes'
 
 const mapStateToProps = state => ({
   cities: state.common.cities,
@@ -12,8 +12,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  addCity: (cityId) =>
-    dispatch({ type: ADD_CITY, payload: cityId }),
+  addCity: (cityId) => {
+    dispatch({ type: ADD_CITY, payload: cityId })
+    dispatch({ type: UPDATE_SETTINGS })
+  },
   onRedirect: () =>
     dispatch({ type: REDIRECT }),
   updateCitiesData: (ids, units, lang) =>
@@ -59,14 +61,14 @@ class AddCityModal extends React.Component {
   }
 
   handleNameChange = (event) => {
-    this.setState({ value: event.target.value });
-  };
+    this.setState({ value: event.target.value })
+  }
 
   handleKeyPress(target) {
     if (target.charCode === 13) {
-      this.toggleOK();
+      this.toggleOK()
     } else if (target.charCode === 27) {
-      this.toggleCancel();
+      this.toggleCancel()
     }
   }
 
@@ -93,8 +95,8 @@ class AddCityModal extends React.Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Add city</ModalHeader>
           <ModalBody>
-            <Label for='selector'>Select</Label>
-            <Input type='text' name='select' value={this.state.value} onChange={this.handleNameChange} innerRef={(input) => { if (input) input.focus() }} onKeyPress={this.handleKeyPress} />
+            <Label for='cityInput'>Select</Label>
+            <Input id='cityInput' type='text' name='select' value={this.state.value} onChange={this.handleNameChange} innerRef={(input) => { if (input) input.focus() }} onKeyPress={this.handleKeyPress} />
           </ModalBody>
           <ModalFooter>
             <Button color='primary' onClick={this.toggleOK}>OK</Button>{' '}

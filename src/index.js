@@ -7,7 +7,7 @@ import Home from './components/Home'
 import City from './components/City'
 import Settings from './components/Settings'
 import store from './store'
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css'
 
 import App from './components/App'
 

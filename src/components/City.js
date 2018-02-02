@@ -47,7 +47,7 @@ class CityPreview extends React.Component {
         <div className='container'>
           <h3>
             <div className='container'>
-              <Button color='primary' href='/#/' >&lt; Back</Button>
+              <Button color='primary' href='/#/' ><i className='wi wi-direction-left' /> Back</Button>
               <div className='row'>
                 <div className='col'>
                   <div className='container'>{city.name} / {city.sys.country} <img src={`http://openweathermap.org/img/w/${city.weather[0].icon}.png`} alt='' /> {city.weather[0].description}</div>

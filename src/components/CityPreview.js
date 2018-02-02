@@ -2,9 +2,9 @@ import React from 'react'
 import { Link } from 'react-router'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Button } from 'reactstrap';
+import { Button } from 'reactstrap'
 import agent from '../agent'
-import { REDIRECT, DELETE_CITY, CITIES_DATA_LOADED } from '../constants/actionTypes'
+import { REDIRECT, DELETE_CITY, CITIES_DATA_LOADED, UPDATE_SETTINGS } from '../constants/actionTypes'
 
 const mapStateToProps = state => ({
   units: state.common.units,
@@ -12,8 +12,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  deleteCity: (id) =>
-    dispatch({ type: DELETE_CITY, payload: id }),
+  deleteCity: (id) => {
+    dispatch({ type: DELETE_CITY, payload: id })
+    dispatch({ type: UPDATE_SETTINGS })
+  },
   onRedirect: () =>
     dispatch({ type: REDIRECT }),
   updateCitiesData: (ids, units, lang) =>
