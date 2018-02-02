@@ -31,6 +31,7 @@ class AddCityModal extends React.Component {
     this.toggleOK = this.toggleOK.bind(this)
     this.toggleCancel = this.toggleCancel.bind(this)
     this.handleNameChange = this.handleNameChange.bind(this)
+    this.handleKeyPress = this.handleKeyPress.bind(this)
   }
 
   toggle() {
@@ -61,6 +62,13 @@ class AddCityModal extends React.Component {
     this.setState({ value: event.target.value });
   };
 
+  handleKeyPress(target) {
+    if (target.charCode === 13) {
+      this.toggleOK();
+    } else if (target.charCode === 27) {
+      this.toggleCancel();
+    }
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.redirectTo) {
@@ -86,7 +94,7 @@ class AddCityModal extends React.Component {
           <ModalHeader toggle={this.toggle}>Add city</ModalHeader>
           <ModalBody>
             <Label for='selector'>Select</Label>
-            <Input type='text' name='select' value={this.state.value} onChange={this.handleNameChange} innerRef={(input) => { if (input) input.focus() }} />
+            <Input type='text' name='select' value={this.state.value} onChange={this.handleNameChange} innerRef={(input) => { if (input) input.focus() }} onKeyPress={this.handleKeyPress} />
           </ModalBody>
           <ModalFooter>
             <Button color='primary' onClick={this.toggleOK}>OK</Button>{' '}

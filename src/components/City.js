@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import agent from '../agent'
-import { Button } from 'reactstrap';
+import { Button } from 'reactstrap'
 import { REDIRECT, CITIES_DATA_LOADED } from '../constants/actionTypes'
 
 const mapStateToProps = state => ({
@@ -19,6 +19,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 class CityPreview extends React.Component {
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.redirectTo) {
       this.context.router.replace(nextProps.redirectTo)
@@ -46,7 +47,7 @@ class CityPreview extends React.Component {
         <div className='container'>
           <h3>
             <div className='container'>
-              <Button color='primary' href='/#/'>&lt; Back</Button>
+              <Button color='primary' href='/#/' >&lt; Back</Button>
               <div className='row'>
                 <div className='col'>
                   <div className='container'>{city.name} / {city.sys.country} <img src={`http://openweathermap.org/img/w/${city.weather[0].icon}.png`} alt='' /> {city.weather[0].description}</div>
