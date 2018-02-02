@@ -34,6 +34,7 @@ class AddCityModal extends React.Component {
     this.toggleCancel = this.toggleCancel.bind(this)
     this.handleNameChange = this.handleNameChange.bind(this)
     this.handleKeyPress = this.handleKeyPress.bind(this)
+    this.checkCityName = this.checkCityName.bind(this)
   }
 
   toggle() {
@@ -62,9 +63,22 @@ class AddCityModal extends React.Component {
 
   handleNameChange = (event) => {
     this.setState({ value: event.target.value })
+    this.checkCityName()
+  }
+
+  checkCityName() {
+    if (this.input) {
+      const foundValue = this.newCitiesList.find(city => city.name === this.input.value)
+      if (foundValue) {
+        this.input.className = 'form-control text-success'
+      } else {
+        this.input.className = 'form-control text-danger'
+      }
+    }
   }
 
   handleKeyPress(target) {
+    this.handleNameChange(target)
     if (target.charCode === 13) {
       this.toggleOK()
     } else if (target.charCode === 27) {
@@ -96,7 +110,7 @@ class AddCityModal extends React.Component {
           <ModalHeader toggle={this.toggle}>Add city</ModalHeader>
           <ModalBody>
             <Label for='cityInput'>Select</Label>
-            <Input id='cityInput' type='text' name='select' value={this.state.value} onChange={this.handleNameChange} innerRef={(input) => { if (input) input.focus() }} onKeyPress={this.handleKeyPress} />
+            <Input id='cityInput' className='text-success' type='text' name='select' value={this.state.value} onChange={this.handleNameChange} innerRef={(input) => { if (input) { this.input = input; input.focus() } }} onKeyPress={this.handleKeyPress} />
           </ModalBody>
           <ModalFooter>
             <Button color='primary' onClick={this.toggleOK}>OK</Button>{' '}
