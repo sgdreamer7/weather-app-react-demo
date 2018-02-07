@@ -8,13 +8,13 @@ const promiseMiddleware = store => next => action => {
     store.dispatch({ type: ASYNC_START, subtype: action.type })
     action.payload.then(
       res => {
-        console.log('RESULT', res)
+        if (process.env.NODE_ENV !== 'production') console.log('RESULT', res)
         action.payload = res
         store.dispatch({ type: ASYNC_END, promise: action.payload })
         store.dispatch(action)
       },
       error => {
-        console.log('ERROR', error)
+        if (process.env.NODE_ENV !== 'production') console.log('ERROR', error)
         action.error = true
         action.payload = error.response.body
         if (!action.skipTracking) {
@@ -30,13 +30,13 @@ const promiseMiddleware = store => next => action => {
 }
 
 const localStorageMiddleware = store => next => action => {
-  const state=store.getState()
-  const snapshot={
-    units:state.common.units,
-    lang:state.common.lang,
-    cities:state.common.cities
+  const state = store.getState()
+  const snapshot = {
+    units: state.common.units,
+    lang: state.common.lang,
+    cities: state.common.cities
   }
-  localStorage.setItem('weather-app-react-demo',JSON.stringify(snapshot))
+  localStorage.setItem('weather-app-react-demo', JSON.stringify(snapshot))
   next(action)
 }
 
