@@ -54,7 +54,7 @@ class CityPreview extends React.Component {
     return (
       <tr>
         <td><Link to={`/city/${this.props.city.id}`}>{this.props.city.name}</Link></td>
-        <td><img src={`http://openweathermap.org/img/w/${this.props.city.weather[0].icon}.png`} alt='' /> {this.props.city.weather[0].description}</td>
+        <td><img src={`https://openweathermap.org/img/w/${this.props.city.weather[0].icon}.png`} alt='' /> {this.props.city.weather[0].description}</td>
         <td>{this.props.city.main.temp}&nbsp;{tempUnits}</td>
         <td>{this.props.city.main.temp_min}&nbsp;{tempUnits}</td>
         <td>{this.props.city.main.temp_max}&nbsp;{tempUnits}</td>

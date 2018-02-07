@@ -50,7 +50,7 @@ class CityPreview extends React.Component {
               <Button color='primary' href='/#/' ><i className='wi wi-direction-left' /> Back</Button>
               <div className='row'>
                 <div className='col'>
-                  <div className='container'>{city.name} / {city.sys.country} <img src={`http://openweathermap.org/img/w/${city.weather[0].icon}.png`} alt='' /> {city.weather[0].description}</div>
+                  <div className='container'>{city.name} / {city.sys.country} <img src={`https://openweathermap.org/img/w/${city.weather[0].icon}.png`} alt='' /> {city.weather[0].description}</div>
                   <div className='container'><i className='wi wi-fw wi-time-2' /> {new Date(city.dt * 1000).toLocaleString()}</div>
                   <div className='container'>&nbsp;</div>
                   <div className='container'><i className='wi wi-fw wi-thermometer' /> {city.main.temp} {tempUnits}, min: {city.main.temp_min} {tempUnits}, max: {city.main.temp_max} {tempUnits}</div>
