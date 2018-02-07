@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore } from 'redux'
+import { applyMiddleware, createStore, compose } from 'redux'
 import { createLogger } from 'redux-logger'
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'
 import { promiseMiddleware, localStorageMiddleware } from './middleware'
@@ -12,6 +12,8 @@ const getMiddleware = () => {
   }
 }
 
-const store = createStore(reducer, composeWithDevTools(getMiddleware()))
+const composeFunction = process.env.NODE_ENV === 'production' ? compose : composeWithDevTools;
+
+const store = createStore(reducer, composeFunction(getMiddleware()))
 
 export default store

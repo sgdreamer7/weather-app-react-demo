@@ -48,17 +48,17 @@ export default (state = defaultState, action) => {
         citiesData: action.payload.list
       }
     case DELETE_CITY:
-      const foundIndex = cities.indexOf(action.payload)
-      if (foundIndex >= 0) {
-        cities.splice(foundIndex, 1)
+      const foundIndexOfRemovingCity = cities.indexOf(action.payload)
+      if (foundIndexOfRemovingCity >= 0) {
+        cities.splice(foundIndexOfRemovingCity, 1)
       }
       return {
         ...state,
         cities: cities.slice()
       }
     case ADD_CITY:
-      const foundIndex2 = cities.indexOf(action.payload)
-      if (foundIndex2 === -1) {
+      const foundIndexOfAddingCity = cities.indexOf(action.payload)
+      if (foundIndexOfAddingCity === -1) {
         cities.push(action.payload)
       }
       return {
@@ -66,20 +66,20 @@ export default (state = defaultState, action) => {
         cities: cities.slice()
       }
     case MOVE_DOWN_CITY:
-      const foundIndex3 = cities.indexOf(action.payload)
-      if ((foundIndex3 >= 0) && (foundIndex3 < cities.length - 1)) {
-        cities.splice(foundIndex3, 1)
-        cities.splice(foundIndex3 + 1, 0, action.payload)
+      const foundIndexOfMovingDownCity = cities.indexOf(action.payload)
+      if ((foundIndexOfMovingDownCity >= 0) && (foundIndexOfMovingDownCity < cities.length - 1)) {
+        cities.splice(foundIndexOfMovingDownCity, 1)
+        cities.splice(foundIndexOfMovingDownCity + 1, 0, action.payload)
       }
       return {
         ...state,
         cities: cities.slice()
       }
     case MOVE_UP_CITY:
-      const foundIndex4 = cities.indexOf(action.payload)
-      if ((foundIndex4 > 0) && (foundIndex4 < cities.length)) {
-        cities.splice(foundIndex4, 1)
-        cities.splice(foundIndex4 - 1, 0, action.payload)
+      const foundIndexOfMovingUpIndex = cities.indexOf(action.payload)
+      if ((foundIndexOfMovingUpIndex > 0) && (foundIndexOfMovingUpIndex < cities.length)) {
+        cities.splice(foundIndexOfMovingUpIndex, 1)
+        cities.splice(foundIndexOfMovingUpIndex - 1, 0, action.payload)
       }
       return {
         ...state,

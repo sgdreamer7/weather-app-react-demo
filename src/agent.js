@@ -35,26 +35,26 @@ const requests = {
 }
 
 const Weather = {
-  currentById: (id,units,lang) =>
+  currentById: (id, units, lang) =>
     requests.get(`/weather?id=${id}&units=${units}&lang=${lang}`),
-  currentGroupByIds: (ids,units,lang) =>
+  currentGroupByIds: (ids, units, lang) =>
     requests.get(`/group?id=${ids.join(',')}&units=${units}&lang=${lang}`),
-  cityIdByName: (cities,cityName) => {
-    const cityIndex = binarySearch(cities, cityName, citiesCompare)
-    return cityIndex >= 0 ? cities[cityIndex].id : -1
-  },
-  citiesNames: (cities) =>
-    cities.map(city => city.name),
+  // cityIdByName: (cities,cityName) => {
+  //   const cityIndex = binarySearch(cities, cityName, citiesCompare)
+  //   return cityIndex >= 0 ? cities[cityIndex].id : -1
+  // },
+  // citiesNames: (cities) =>
+  //   cities.map(city => city.name),
   loadCitiesData: () => {
     return superagent.get(CITIES_URL)
-    .then(response => {
-      let c = response.body
-      c.sort(citiesCompare)
-      return c.slice()
-    })
-    .catch(error => {
-      return []
-    })
+      .then(response => {
+        let c = response.body
+        c.sort(citiesCompare)
+        return c.slice()
+      })
+      .catch(error => {
+        return []
+      })
   }
 }
 
