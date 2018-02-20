@@ -1,4 +1,5 @@
 export const APP_LOAD = 'APP_LOAD'
+export const APP_LOAD_PROGRESS = 'APP_LOAD_PROGRESS'
 export const REDIRECT = 'REDIRECT'
 export const HOME_PAGE_LOADED = 'HOME_PAGE_LOADED'
 export const ASYNC_START = 'ASYNC_START'

@@ -6,11 +6,12 @@ import api from '../api'
 import timers from '../timers'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { APP_LOAD, REDIRECT, CITIES_DATA_LOADED } from '../constants/actionTypes'
+import { APP_LOAD, APP_LOAD_PROGRESS, REDIRECT, CITIES_DATA_LOADED } from '../constants/actionTypes'
 import { UPDATE_CITIES_DATA_TIMER } from '../constants/timersNames'
 
 const mapStateToProps = state => ({
   appLoaded: state.common.appLoaded,
+  appLoadProgress: state.common.appLoadProgress,
   appName: state.common.appName,
   redirectTo: state.common.redirectTo
 })
@@ -21,8 +22,7 @@ const mapDispatchToProps = dispatch => ({
       type: APP_LOAD, payload: api.Weather.loadCitiesData({
         onDownloadProgress: progressEvent => {
           const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length')
-          console.log(progressEvent)
-          totalLength !== null && console.log(Math.round((progressEvent.loaded * 100) / totalLength))
+          totalLength !== null && dispatch({ type: APP_LOAD_PROGRESS, payload: Math.round((progressEvent.loaded * 100) / totalLength) })
         }
       })
     }),
@@ -74,7 +74,7 @@ class App extends React.Component {
         <Header appName={this.props.appName} />
         <div className='container'>
           <main role='main' className='container mt-5 pt-3'>
-            <h3 className='alert alert-info text-center'>Loading cities list....</h3>
+            <h3 className='alert alert-info text-center'>Loading cities list: <progress value={this.props.appLoadProgress} max="100"></progress><span>&nbsp;{this.props.appLoadProgress}&nbsp;%</span></h3>
           </main>
         </div>
         <Footer />

@@ -1,5 +1,6 @@
 import {
   APP_LOAD,
+  APP_LOAD_PROGRESS,
   REDIRECT,
   CITIES_DATA_LOADED,
   DELETE_CITY,
@@ -39,6 +40,11 @@ export default (state = defaultState, action) => {
         ...state,
         citiesList: action.payload,
         appLoaded: true
+      }
+    case APP_LOAD_PROGRESS:
+      return {
+        ...state,
+        appLoadProgress: action.payload
       }
     case REDIRECT:
       return { ...state, redirectTo: null }
