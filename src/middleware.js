@@ -16,7 +16,7 @@ const promiseMiddleware = store => next => action => {
       error => {
         if (process.env.NODE_ENV !== 'production') console.log('ERROR', error)
         action.error = true
-        action.payload = error.response.body
+        action.payload = error
         if (!action.skipTracking) {
           store.dispatch({ type: ASYNC_END, promise: action.payload })
         }

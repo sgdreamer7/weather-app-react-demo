@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import agent from '../agent'
+import api from '../api'
 import timers from '../timers'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -17,11 +17,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onLoad: () =>
-    dispatch({ type: APP_LOAD, payload: agent.Weather.loadCitiesData() }),
+    dispatch({ type: APP_LOAD, payload: api.Weather.loadCitiesData() }),
   onRedirect: () =>
     dispatch({ type: REDIRECT }),
   updateCitiesData: (ids, units, lang) =>
-    dispatch({ type: CITIES_DATA_LOADED, payload: agent.Weather.currentGroupByIds(ids, units, lang) })
+    dispatch({ type: CITIES_DATA_LOADED, payload: api.Weather.currentGroupByIds(ids, units, lang) })
 })
 
 class App extends React.Component {

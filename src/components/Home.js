@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import agent from '../agent'
+import api from '../api'
 import CityPreview from '../components/CityPreview'
 import AddCityModal from '../components/AddCityModal'
 import { REDIRECT, CITIES_DATA_LOADED } from '../constants/actionTypes'
@@ -16,7 +16,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onLoad: (ids, units, lang) =>
-    dispatch({ type: CITIES_DATA_LOADED, payload: agent.Weather.currentGroupByIds(ids, units, lang) }),
+    dispatch({ type: CITIES_DATA_LOADED, payload: api.Weather.currentGroupByIds(ids, units, lang) }),
   onRedirect: () =>
     dispatch({ type: REDIRECT })
 })
