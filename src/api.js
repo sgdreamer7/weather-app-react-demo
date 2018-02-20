@@ -35,8 +35,8 @@ function get(url) {
   return getInitializedApi().get(buildUrlWithApiKey(url)).then(responseData)
 }
 
-function getLocal(url) {
-  return getInitializedApiLocal().get(url)
+function getLocal(url, options) {
+  return getInitializedApiLocal().get(url, options)
 }
 
 
@@ -45,8 +45,8 @@ const Weather = {
     get(`/weather?id=${id}&units=${units}&lang=${lang}`),
   currentGroupByIds: (ids, units, lang) =>
     get(`/group?id=${ids.join(',')}&units=${units}&lang=${lang}`),
-  loadCitiesData: () => {
-    return getLocal(CITIES_URL)
+  loadCitiesData: (options) => {
+    return getLocal(CITIES_URL, options)
       .then(response => {
         const c = response.data
         c.sort(citiesCompare)

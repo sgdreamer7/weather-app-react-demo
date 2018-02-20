@@ -17,7 +17,15 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onLoad: () =>
-    dispatch({ type: APP_LOAD, payload: api.Weather.loadCitiesData() }),
+    dispatch({
+      type: APP_LOAD, payload: api.Weather.loadCitiesData({
+        onDownloadProgress: progressEvent => {
+          const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length')
+          console.log(progressEvent)
+          totalLength !== null && console.log(Math.round((progressEvent.loaded * 100) / totalLength))
+        }
+      })
+    }),
   onRedirect: () =>
     dispatch({ type: REDIRECT }),
   updateCitiesData: (ids, units, lang) =>
