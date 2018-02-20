@@ -21,8 +21,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch({
       type: APP_LOAD, payload: api.Weather.loadCitiesData({
         onDownloadProgress: progressEvent => {
-          const totalLength = progressEvent.lengthComputable ? progressEvent.total : progressEvent.target.getResponseHeader('content-length') || progressEvent.target.getResponseHeader('x-decompressed-content-length')
-          totalLength !== null && dispatch({ type: APP_LOAD_PROGRESS, payload: Math.round((progressEvent.loaded * 100) / totalLength) })
+          progressEvent.loaded && dispatch({ type: APP_LOAD_PROGRESS, payload: Math.round((progressEvent.loaded * 100) / 18999030) })
         }
       })
     }),

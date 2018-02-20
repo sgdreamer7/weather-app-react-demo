@@ -46,7 +46,7 @@ const Weather = {
   currentGroupByIds: (ids, units, lang) =>
     get(`/group?id=${ids.join(',')}&units=${units}&lang=${lang}`),
   loadCitiesData: (options) => {
-    return getLocal(CITIES_URL, { ...options, headers: { 'Accept-Encoding': 'identity' } })
+    return getLocal(CITIES_URL, { ...options })
       .then(response => {
         const c = response.data
         c.sort(citiesCompare)
