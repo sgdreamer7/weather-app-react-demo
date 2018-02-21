@@ -1,16 +1,13 @@
-import {
-  ASYNC_START,
-  ASYNC_END
-} from './constants/actionTypes'
+import { actionAsyncStart, actionAsyncEnd } from './actions/middlewareActions'
 
 const promiseMiddleware = store => next => action => {
   if (isPromise(action.payload)) {
-    store.dispatch({ type: ASYNC_START, subtype: action.type })
+    store.dispatch(actionAsyncStart(action.type))
     action.payload.then(
       res => {
         if (process.env.NODE_ENV !== 'production') console.log('RESULT', res)
         action.payload = res
-        store.dispatch({ type: ASYNC_END, promise: action.payload })
+        store.dispatch(actionAsyncEnd(action.payload))
         store.dispatch(action)
       },
       error => {
@@ -18,7 +15,7 @@ const promiseMiddleware = store => next => action => {
         action.error = true
         action.payload = error
         if (!action.skipTracking) {
-          store.dispatch({ type: ASYNC_END, promise: action.payload })
+          store.dispatch(actionAsyncEnd(action.payload))
         }
         store.dispatch(action)
       }

@@ -10,3 +10,4 @@ export const MOVE_UP_CITY = 'MOVE_UP_CITY'
 export const UPDATE_UNITS = 'UPDATE_UNITS'
 export const UPDATE_LANG = 'UPDATE_LANG'
 export const UPDATE_SETTINGS = 'UPDATE_SETTINGS'
+
