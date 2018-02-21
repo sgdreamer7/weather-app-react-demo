@@ -1,16 +1,6 @@
-import {
-  APP_LOAD,
-  APP_LOAD_PROGRESS,
-  REDIRECT,
-  CITIES_DATA_LOADED,
-  DELETE_CITY,
-  ADD_CITY,
-  MOVE_DOWN_CITY,
-  MOVE_UP_CITY,
-  UPDATE_UNITS,
-  UPDATE_LANG,
-  UPDATE_SETTINGS
-} from '../constants/actionTypes'
+import { APP_LOAD, APP_LOAD_PROGRESS, REDIRECT, CITIES_DATA_LOADED, } from '../actions/commonActions'
+import { UPDATE_UNITS, UPDATE_LANG, UPDATE_SETTINGS } from '../actions/settingsActions'
+import { ADD_CITY, DELETE_CITY, MOVE_DOWN_CITY, MOVE_UP_CITY } from '../actions/cityActions'
 
 const snapshot = JSON.parse(localStorage.getItem('weather-app-react-demo'))
 

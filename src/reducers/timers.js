@@ -1,4 +1,4 @@
-import { CREATE_TIMER, DELETE_TIMER } from '../constants/actionTypes'
+import { CREATE_TIMER, DELETE_TIMER } from '../actions/timersActions'
 
 const defaultState = {
   timers: []

@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Button } from 'reactstrap'
 import api from '../api'
-import { REDIRECT, DELETE_CITY, CITIES_DATA_LOADED, UPDATE_SETTINGS, MOVE_DOWN_CITY, MOVE_UP_CITY } from '../constants/actionTypes'
+import { actionRedirect, actionCitiesDataLoaded } from '../actions/commonActions'
+import { actionUpdateSettings } from '../actions/settingsActions'
+import { actionDeleteCity, actionMoveDownCity, actionMoveUpCity } from '../actions/cityActions'
 
 const mapStateToProps = state => ({
   units: state.common.units,
@@ -12,22 +14,22 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  deleteCity: (id) => {
-    dispatch({ type: DELETE_CITY, payload: id })
-    dispatch({ type: UPDATE_SETTINGS })
+  deleteCity: (cityId) => {
+    dispatch(actionDeleteCity(cityId))
+    dispatch(actionUpdateSettings())
   },
-  moveDownCity: (id) => {
-    dispatch({ type: MOVE_DOWN_CITY, payload: id })
-    dispatch({ type: UPDATE_SETTINGS })
+  moveDownCity: (cityId) => {
+    dispatch(actionMoveDownCity(cityId))
+    dispatch(actionUpdateSettings())
   },
-  moveUpCity: (id) => {
-    dispatch({ type: MOVE_UP_CITY, payload: id })
-    dispatch({ type: UPDATE_SETTINGS })
+  moveUpCity: (cityId) => {
+    dispatch(actionMoveUpCity(cityId))
+    dispatch(actionUpdateSettings())
   },
   onRedirect: () =>
-    dispatch({ type: REDIRECT }),
+    dispatch(actionRedirect()),
   updateCitiesData: (ids, units, lang) =>
-    dispatch({ type: CITIES_DATA_LOADED, payload: api.Weather.currentGroupByIds(ids, units, lang) })
+    dispatch(actionCitiesDataLoaded(api.Weather.currentGroupByIds(ids, units, lang)))
 })
 
 class CityPreview extends React.Component {

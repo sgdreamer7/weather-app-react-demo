@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import api from '../api'
 import CityPreview from '../components/CityPreview'
 import AddCityModal from '../components/AddCityModal'
-import { REDIRECT, CITIES_DATA_LOADED } from '../constants/actionTypes'
+import { actionRedirect, actionCitiesDataLoaded } from '../actions/commonActions'
 
 const mapStateToProps = state => ({
   cities: state.common.cities,
@@ -16,9 +16,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onLoad: (ids, units, lang) =>
-    dispatch({ type: CITIES_DATA_LOADED, payload: api.Weather.currentGroupByIds(ids, units, lang) }),
+    dispatch(actionCitiesDataLoaded(api.Weather.currentGroupByIds(ids, units, lang))),
   onRedirect: () =>
-    dispatch({ type: REDIRECT })
+    dispatch(actionRedirect())
 })
 
 class Home extends React.Component {

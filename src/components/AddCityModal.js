@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import api from '../api'
 import { Label, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
-import { REDIRECT, ADD_CITY, CITIES_DATA_LOADED, UPDATE_SETTINGS } from '../constants/actionTypes'
+import { actionRedirect, actionCitiesDataLoaded } from '../actions/commonActions'
+import { actionUpdateSettings } from '../actions/settingsActions'
+import { actionAddCity } from '../actions/cityActions'
 
 const mapStateToProps = state => ({
   cities: state.common.cities,
@@ -13,13 +15,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addCity: (cityId) => {
-    dispatch({ type: ADD_CITY, payload: cityId })
-    dispatch({ type: UPDATE_SETTINGS })
+    dispatch(actionAddCity(cityId))
+    dispatch(actionUpdateSettings())
   },
   onRedirect: () =>
-    dispatch({ type: REDIRECT }),
+    dispatch(actionRedirect()),
   updateCitiesData: (ids, units, lang) =>
-    dispatch({ type: CITIES_DATA_LOADED, payload: api.Weather.currentGroupByIds(ids, units, lang) })
+    dispatch(actionCitiesDataLoaded(api.Weather.currentGroupByIds(ids, units, lang)))
 })
 
 class AddCityModal extends React.Component {
