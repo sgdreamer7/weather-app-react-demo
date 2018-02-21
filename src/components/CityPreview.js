@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Button } from 'reactstrap'
 import api from '../api'
-import { REDIRECT, CITIES_DATA_LOADED } from '../constants/actionTypes'
+import { actionRedirect, actionCitiesDataLoaded } from '../actions/commonActions'
 import { actionUpdateSettings } from '../actions/settingsActions'
 import { actionDeleteCity, actionMoveDownCity, actionMoveUpCity } from '../actions/cityActions'
 
@@ -27,9 +27,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actionUpdateSettings())
   },
   onRedirect: () =>
-    dispatch({ type: REDIRECT }),
+    dispatch(actionRedirect()),
   updateCitiesData: (ids, units, lang) =>
-    dispatch({ type: CITIES_DATA_LOADED, payload: api.Weather.currentGroupByIds(ids, units, lang) })
+    dispatch(actionCitiesDataLoaded(api.Weather.currentGroupByIds(ids, units, lang)))
 })
 
 class CityPreview extends React.Component {

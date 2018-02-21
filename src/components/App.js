@@ -6,8 +6,8 @@ import api from '../api'
 import timers from '../timers'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { APP_LOAD, APP_LOAD_PROGRESS, REDIRECT, CITIES_DATA_LOADED } from '../constants/actionTypes'
 import { UPDATE_CITIES_DATA_TIMER } from '../constants/timersNames'
+import { actionAppLoad, actionAppLoadProgress, actionRedirect, actionCitiesDataLoaded } from '../actions/commonActions'
 
 const mapStateToProps = state => ({
   appLoaded: state.common.appLoaded,
@@ -18,17 +18,17 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onLoad: () =>
-    dispatch({
-      type: APP_LOAD, payload: api.Weather.loadCitiesData({
+    dispatch(actionAppLoad(
+      api.Weather.loadCitiesData({
         onDownloadProgress: progressEvent => {
-          progressEvent.loaded && dispatch({ type: APP_LOAD_PROGRESS, payload: Math.round((progressEvent.loaded * 100) / 18999030) })
+          progressEvent.loaded && dispatch(actionAppLoadProgress(Math.round((progressEvent.loaded * 100) / 18999030)))
         }
       })
-    }),
+    )),
   onRedirect: () =>
-    dispatch({ type: REDIRECT }),
+    dispatch(actionRedirect()),
   updateCitiesData: (ids, units, lang) =>
-    dispatch({ type: CITIES_DATA_LOADED, payload: api.Weather.currentGroupByIds(ids, units, lang) })
+    dispatch(actionCitiesDataLoaded(api.Weather.currentGroupByIds(ids, units, lang)))
 })
 
 class App extends React.Component {
