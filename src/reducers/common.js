@@ -6,11 +6,9 @@ import {
   DELETE_CITY,
   ADD_CITY,
   MOVE_DOWN_CITY,
-  MOVE_UP_CITY,
-  UPDATE_UNITS,
-  UPDATE_LANG,
-  UPDATE_SETTINGS
+  MOVE_UP_CITY
 } from '../constants/actionTypes'
+import { UPDATE_UNITS, UPDATE_LANG, UPDATE_SETTINGS } from '../actions/settingsActions'
 
 const snapshot = JSON.parse(localStorage.getItem('weather-app-react-demo'))
 

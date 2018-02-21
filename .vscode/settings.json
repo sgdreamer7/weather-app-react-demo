@@ -3,6 +3,7 @@
     "editor.insertSpaces": true,
     "cSpell.words": [
         "appid",
-        "nbsp"
+        "nbsp",
+        "reactstrap"
     ]
 }

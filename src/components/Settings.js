@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Label, Input } from 'reactstrap'
-import { REDIRECT, UPDATE_UNITS, UPDATE_LANG, UPDATE_SETTINGS } from '../constants/actionTypes'
+import { REDIRECT } from '../constants/actionTypes'
+import { actionUpdateUnits, actionUpdateLanguage, actionUpdateSettings } from '../actions/settingsActions'
 
 const mapStateToProps = state => ({
   cities: state.common.cities,
@@ -16,12 +17,12 @@ const mapDispatchToProps = dispatch => ({
   onRedirect: () =>
     dispatch({ type: REDIRECT }),
   onUpdateUnits: (units) => {
-    dispatch({ type: UPDATE_UNITS, payload: units })
-    dispatch({ type: UPDATE_SETTINGS })
+    dispatch(actionUpdateUnits(units))
+    dispatch(actionUpdateSettings())
   },
-  onUpdateLang: (lang) => {
-    dispatch({ type: UPDATE_LANG, payload: lang })
-    dispatch({ type: UPDATE_SETTINGS })
+  onUpdateLang: (language) => {
+    dispatch(actionUpdateLanguage(language))
+    dispatch(actionUpdateSettings())
   }
 })
 
