@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import api from '../api'
 import { Label, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
-import { REDIRECT, ADD_CITY, CITIES_DATA_LOADED, UPDATE_SETTINGS } from '../constants/actionTypes'
+import { REDIRECT, ADD_CITY, CITIES_DATA_LOADED } from '../constants/actionTypes'
+import { actionUpdateSettings } from '../actions/settingsActions'
 
 const mapStateToProps = state => ({
   cities: state.common.cities,
@@ -14,7 +15,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   addCity: (cityId) => {
     dispatch({ type: ADD_CITY, payload: cityId })
-    dispatch({ type: UPDATE_SETTINGS })
+    dispatch(actionUpdateSettings())
   },
   onRedirect: () =>
     dispatch({ type: REDIRECT }),

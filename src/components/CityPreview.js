@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Button } from 'reactstrap'
 import api from '../api'
-import { REDIRECT, DELETE_CITY, CITIES_DATA_LOADED, UPDATE_SETTINGS, MOVE_DOWN_CITY, MOVE_UP_CITY } from '../constants/actionTypes'
+import { REDIRECT, DELETE_CITY, CITIES_DATA_LOADED, MOVE_DOWN_CITY, MOVE_UP_CITY } from '../constants/actionTypes'
+import { actionUpdateSettings } from '../actions/settingsActions'
 
 const mapStateToProps = state => ({
   units: state.common.units,
@@ -14,15 +15,15 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   deleteCity: (id) => {
     dispatch({ type: DELETE_CITY, payload: id })
-    dispatch({ type: UPDATE_SETTINGS })
+    dispatch(actionUpdateSettings())
   },
   moveDownCity: (id) => {
     dispatch({ type: MOVE_DOWN_CITY, payload: id })
-    dispatch({ type: UPDATE_SETTINGS })
+    dispatch(actionUpdateSettings())
   },
   moveUpCity: (id) => {
     dispatch({ type: MOVE_UP_CITY, payload: id })
-    dispatch({ type: UPDATE_SETTINGS })
+    dispatch(actionUpdateSettings())
   },
   onRedirect: () =>
     dispatch({ type: REDIRECT }),
