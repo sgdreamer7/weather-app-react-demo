@@ -1,4 +1,4 @@
-import { CREATE_TIMER, DELETE_TIMER } from './constants/actionTypes'
+import { actionCreateTimer, actionDeleteTimer } from './actions/timersActions'
 import { setInterval } from 'timers'
 
 function createTimer(store, timerName, callback, interval) {
@@ -9,14 +9,14 @@ function createTimer(store, timerName, callback, interval) {
     callback,
     id: setInterval(callback, interval)
   }
-  store.dispatch({ type: CREATE_TIMER, timer })
+  store.dispatch(actionCreateTimer(timer))
 }
 
 function deleteTimer(store, timerName) {
   let oldTimer = getTimer(store, timerName)
   if (oldTimer) {
     clearInterval(oldTimer.id)
-    store.dispatch({ type: DELETE_TIMER, timer: oldTimer })
+    store.dispatch(actionDeleteTimer(oldTimer))
   }
 }
 
