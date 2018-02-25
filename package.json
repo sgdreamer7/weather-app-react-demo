@@ -60,7 +60,7 @@
   "scripts": {
     "start": "cross-env PORT=4100 node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "cross-env PORT=4100 node scripts/test.js --env=jsdom",
+    "test": "cross-env PORT=4100 node scripts/test.js --env=jsdom --coverage",
     "predeploy:github": "cross-env PUBLIC_URL='https://sgdreamer7.github.io/weather-app-react-demo/' && npm run build",
     "deploy:github": "gh-pages -d build",
     "predeploy:heroku": "cross-env PUBLIC_URL='https://weather-app-react-demo.herokuapp.com/' && npm run build",
@@ -68,14 +68,17 @@
     "deploy": "npm run deploy:heroku && npm run deploy:github"
   },
   "devDependencies": {
-    "cross-env": "^5.1.3"
+    "cross-env": "^5.1.3",
+    "moxios": "^0.4.0",
+    "path": "^0.12.7"
   },
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,mjs}"
     ],
     "setupFiles": [
-      "<rootDir>/config/polyfills.js"
+      "<rootDir>/config/polyfills.js",
+      "<rootDir>/src/tests/testsSetup.js"
     ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
@@ -102,6 +105,9 @@
       "web.jsx",
       "jsx",
       "node"
+    ],
+    "coverageReporters": [
+      "html"
     ]
   },
   "babel": {

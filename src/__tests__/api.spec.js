@@ -1,13 +1,24 @@
 import '../tests/mock-localstorage'
-
+import moxios from 'moxios'
 import api from '../api'
+import { CITIES_FILE, CITIES_URL } from '../api'
 
-describe('API tests', () => {
 
+describe('API tests', async () => {
+  beforeAll(() => {
+  })
+
+  afterAll(() => {
+
+  })
+
+  beforeEach(() => {
+
+  })
   afterEach(() => {
-    localStorage.clear();
-    sessionStorage.clear();
-  });
+    localStorage.clear()
+    sessionStorage.clear()
+  })
 
   it('Weather.currentById', async () => {
     const data = await api.Weather.currentById(687700, 'metric', 'ru')
@@ -34,8 +45,24 @@ describe('API tests', () => {
   })
 
   it('Weather.loadCitiesData', async () => {
+    moxios.install()
+    const fs = require('fs');
+    const file = fs.readFileSync(require('path').resolve(`public/${CITIES_FILE}`), 'utf8')
+    const response = JSON.parse(file)
+    moxios.stubRequest(CITIES_URL, {
+      status: 200,
+      response: response
+    })
     const data = await api.Weather.loadCitiesData()
-    expect(data).toEqual([])
-  })
+    expect(data.length).toBe(209579)
+    moxios.uninstall()
+    moxios.install()
+    moxios.stubRequest(CITIES_URL, {
+      status: 404
+    })
+    const nodata = await api.Weather.loadCitiesData()
+    expect(nodata.length).toBe(0)
+    moxios.uninstall()
+  }, 5000)
 
 })

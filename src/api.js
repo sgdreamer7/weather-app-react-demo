@@ -2,7 +2,8 @@ import axios from 'axios'
 
 const WEATHER_API_KEY = '6572b42df938f020e05135df9086ac95'
 const WEATHER_API_ROOT = 'https://api.openweathermap.org/data/2.5'
-const CITIES_URL = `${window.PUBLIC_URL}/city.list.min.json`
+export const CITIES_FILE = 'city.list.min.json'
+export const CITIES_URL = `${window.PUBLIC_URL}/${CITIES_FILE}`
 
 let api = null
 let apiLocal = null
