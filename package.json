@@ -2,6 +2,7 @@
   "name": "weather-map-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://sgdreamer7.github.io/weather-app-react-demo/",
   "dependencies": {
     "autoprefixer": "7.1.6",
     "axios": "^0.18.0",
@@ -59,7 +60,12 @@
   "scripts": {
     "start": "cross-env PORT=4100 node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "cross-env PORT=4100 node scripts/test.js --env=jsdom"
+    "test": "cross-env PORT=4100 node scripts/test.js --env=jsdom",
+    "predeploy:github": "cross-env PUBLIC_URL='https://sgdreamer7.github.io/weather-app-react-demo/' && npm run build",
+    "deploy:github": "gh-pages -d build",
+    "predeploy:heroku": "cross-env PUBLIC_URL='https://weather-app-react-demo.herokuapp.com/' && npm run build",
+    "deploy:heroku": "git push heroku master",
+    "deploy": "npm run deploy:heroku && npm run deploy:github"
   },
   "devDependencies": {
     "cross-env": "^5.1.3"
